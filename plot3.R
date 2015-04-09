@@ -1,14 +1,11 @@
 
 ##read data
-x<- read.table("household_power_consumption.txt", sep=';',header=TRUE)
+x<- read.table("household_power_consumption.txt", sep=';',na.string='?',header=TRUE)
 
 ##subset the data to show only the two dates
 y<-x[x$Date=='1/2/2007' | x$Date=='2/2/2007',]
 
-## transform the data to numeric
-y[,7]<-as.numeric(as.character(y[,7]))
-y[,8]<-as.numeric(as.character(y[,8]))
-y[,9]<-as.numeric(as.character(y[,9]))
+
 
 ## create a new column combining date and time
 a <- cbind(y,"DateTime" = strptime(paste(y$Date, y$Time), "%d/%m/%Y %H:%M:%S"))

@@ -1,12 +1,10 @@
 
 ##read data
-x<- read.table("household_power_consumption.txt", sep=';',header=TRUE)
+x<- read.table("household_power_consumption.txt", sep=';',na.string='?',header=TRUE)
 
 ##subset the data to show only the two dates
 y<-x[x$Date=='1/2/2007' | x$Date=='2/2/2007',]
 
-## transform the data to numeric
-y[,3]<-as.numeric(as.character(y[,3]))
 
 ##Adjust the environment
 par(mfcol=c(1,1))

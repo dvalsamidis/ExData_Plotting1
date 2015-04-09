@@ -1,17 +1,11 @@
 
 ##read data
-x<- read.table("household_power_consumption.txt", sep=';',header=TRUE)
+x<- read.table("household_power_consumption.txt", sep=';',na.string='?', header=TRUE)
 
 ##subset the data to show only the two dates
 y<-x[x$Date=='1/2/2007' | x$Date=='2/2/2007',]
 
-## transform the data to numeric
-y[,3]<-as.numeric(as.character(y[,3]))
-y[,4]<-as.numeric(as.character(y[,4]))
-y[,5]<-as.numeric(as.character(y[,5]))
-y[,7]<-as.numeric(as.character(y[,7]))
-y[,8]<-as.numeric(as.character(y[,8]))
-y[,9]<-as.numeric(as.character(y[,9]))
+
 
 ## create a new column combining date and time
 a <- cbind(y,"datetime" = strptime(paste(y$Date, y$Time), "%d/%m/%Y %H:%M:%S"))
@@ -45,12 +39,14 @@ lines(a$datetime, a$Sub_metering_3, col="blue")
 ## Add Legend
 legend("topright",lwd = 1,col= c("black", "red", "blue"),legend=c("Sub_metering_1","Sub_metering_2","Sub_metering_3"))
 
+
 ##Third Graph
 ## Create an empty plot and name the y label
 plot(a$datetime, a$Voltage, type="n", ylab="Voltage", xlab="datetime")
 
 ## Then add a line
 lines(a$datetime, a$Voltage)
+
 
 ##Fourth Graph
 ## Create an empty plot and name the y label
